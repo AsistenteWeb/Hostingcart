@@ -21,3 +21,5 @@ parameters:
     reseller_authuserid:
     reseller_apikey:
     reseller_test:
+
+    assets_version_param: 0.0.1
