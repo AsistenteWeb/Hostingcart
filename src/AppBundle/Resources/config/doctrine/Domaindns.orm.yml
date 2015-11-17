@@ -1,0 +1,19 @@
+AppBundle\Entity\Domaindns:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    dns:
+      type: string
+      length: 255
+      nullable: false
+  manyToOne:
+    serverdomain:
+      targetEntity: Serverdomain
+      inversedBy: domaindns
+      joinColumn:
+        name: serverdomain_id
+        referencedColumnName: id

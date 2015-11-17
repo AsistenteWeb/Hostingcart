@@ -1,0 +1,18 @@
+AppBundle\Entity\Domainaction:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    nameaction:
+      type: string
+      nullable: true
+    alias:
+      type: string
+      nullable: true
+  oneToMany:
+    domainproduct:
+      targetEntity: Domainproduct
+      mappedBy: domainaction

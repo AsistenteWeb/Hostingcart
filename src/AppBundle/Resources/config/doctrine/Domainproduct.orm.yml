@@ -1,0 +1,39 @@
+AppBundle\Entity\Domainproduct:
+  type: entity
+  repositoryClass: DomainproductRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    price:
+      type: decimal
+      precision: 2
+      nullable: true
+  oneToMany:
+    corderdomain:
+      targetEntity: Corderdomain
+      mappedBy: domainproduct
+  manyToOne:
+    domainaction:
+      targetEntity: Domainaction
+      inversedBy: domainproduct
+      joinColumns:
+        domainaction_id:
+          referencedColumnName: id
+          nullable: false
+    tld:
+      targetEntity: Tld
+      inversedBy: domainproduct
+      joinColumns:
+        tld_id:
+          referencedColumnName: id
+          nullable: false
+    product:
+      targetEntity: Product
+      inversedBy: domainproduct
+      joinColumns:
+        product_id:
+          referencedColumnName: id
+          nullable: false

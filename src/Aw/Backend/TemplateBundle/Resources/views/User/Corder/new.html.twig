@@ -1,0 +1,195 @@
+{% form_theme form _self %}
+
+{%- block form_label %}
+    {% if form.vars.label != '' %}
+        <label class="col-md-4 col-md-offset-1 control-label">{{ form.vars.label }}</label>
+    {% endif %}
+{%- endblock form_label %}
+<!-- /.tab-pane -->
+<div class="tab-pane" id="timeline">
+    <div>
+        {{ user.firstname }} {{ user.lastname }}<br> {{ user.email }}
+    </div>
+    <form id="form_corder" action="{{ path('backend_user_register_corder', { 'id': user.id }) }}" method="post" novalidate="novalidate">
+    <!-- The timeline -->
+        <ul class="timeline timeline-inverse">
+        <!-- timeline time label -->
+        <li class="time-label">
+                <span class="bg-blue">
+                  Nueva orden
+                </span>
+        </li>
+        <li>
+            <i class="fa fa-bars bg-blue"></i>
+
+            <div class="timeline-item">
+                    <h3 class="timeline-header">
+                        Dominio (obligatorio)
+                        {{ form_widget(form.domain) }}
+                        <button id="verify_domain" class="btn btn-block btn-success btn-sm" type="button">Verficar</button>
+                        <button id="verify_transfer_domain" class="btn btn-block btn-danger btn-sm hide" style="margin-top: 0px" type="button">Verficar si es transferible</button>
+                        <div id="verify_response"> </div>
+                    </h3>
+                    <h3 id="cod_autorization" class="timeline-header hide">
+                        <a href="#">Código de Autorización </a>
+                        {{ form_widget(form.auto_code ) }}
+                    </h3>
+
+                    <div class="timeline-body">
+                        <div>{{ form_widget(form.register) }}</div>
+                        <div>{{ form_widget(form.corderhosting.hostingproduct) }}</div>
+                    </div>
+
+                {% if corder.corderhosting.hostingproduct is defined %}
+                    {% set hostingPrice = corder.corderhosting.price %}
+                    <span class="time"><i class="fa fa-money"></i> {{ hostingPrice|number_format(2) }}</span>
+                    <h3 class="timeline-header"><a href="#">Plan {{ corder.corderhosting.hostingproduct.hostingplan.plan }}</a> {{ corder.corderhosting.domaintld }}</h3>
+
+                    <div class="timeline-body">
+                        Usuario<br>
+                        Contraseña<br>
+                        <a class="btn btn-primary btn-xs">Cambiar contraseña</a>
+                        <a class="btn btn-warning btn-xs">Suspender</a>
+                        <a class="btn btn-danger btn-xs">Terminar</a>
+                    </div>
+                {% else %}
+                    {% set hostingPrice = 0 %}
+                {% endif %}
+            </div>
+        </li>
+        <li>
+            <div class="timeline-item bg-white">
+                <h3 class="timeline-header">
+                    <a id="advanced_button" href="#"><span class="time"><i class="fa fa-plus-circle"></i></span> Avanzada</a>
+                </h3>
+                <div id="advanced_body" class="timeline-body hide">
+                    {{ form_widget(form.create_host) }}
+                    {{ form_widget(form.hosting_mail) }}
+                    {{ form_widget(form.register_domain) }}
+                    <div>
+                        <a id="domain_data_button" href="#">
+                            <span class="time"><i class="fa fa-plus-circle "></i></span> Modificar datos del dominio
+                        </a>
+                    </div>
+                    <div id="domain_body" class="hide">
+                        <div class="row">
+                            <div class="col-md-offset-1">
+                                <a id="contact_register_button" href="#"><span class="time"><i class="fa fa-plus-circle "></i></span> Registrante</a>
+                            </div>
+                        </div>
+
+                        <div id="contact_register_body" class="hide">
+                            {% include '@AwBackendTemplate/User/Corder/FormContact/contact.html.twig' with  {'form_contact': form.contact_register} %}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-offset-1">
+                                <a id="contact_administrative_button" href="#"><span class="time"><i class="fa fa-plus-circle "></i></span> Administrativo</a>
+                            </div>
+                        </div>
+
+                        <div id="contact_administrative_body" class="hide">
+                            {% include '@AwBackendTemplate/User/Corder/FormContact/contact.html.twig' with  {'form_contact': form.contact_administrator} %}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-offset-1">
+                                <a id="contact_billing_button" href="#"><span class="time"><i class="fa fa-plus-circle "></i></span> Pago</a>
+                            </div>
+                        </div>
+
+                        <div id="contact_billing_body" class="hide">
+                            {% include '@AwBackendTemplate/User/Corder/FormContact/contact.html.twig' with  {'form_contact': form.contact_billing} %}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-offset-1">
+                                <a id="contact_technical_button" href="#"><span class="time"><i class="fa fa-plus-circle "></i></span> Técnico</a>
+                            </div>
+                        </div>
+
+                        <div id="contact_technical_body" class="hide">
+                            {% include '@AwBackendTemplate/User/Corder/FormContact/contact.html.twig' with  {'form_contact': form.contact_technical} %}
+                        </div>
+                    </div>
+
+                    <div>
+                        <a id="domain_dns_button" href="#">
+                            <span class="time"><i class="fa fa-plus-circle "></i></span> Modificar DNSs<br>
+                        </a>
+                    </div>
+
+                    <div id="domain_dns_body" class="hide">
+                        <div class="row">
+                            <label class="col-md-2 col-md-offset-1 control-label">DNS1: </label>
+                            <div class="col-md-7">
+                                {{ form_widget(form.dns1.dns) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-md-2 col-md-offset-1 control-label">DNS2: </label>
+                            <div class="col-md-7">
+                                {{ form_widget(form.dns2.dns) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-md-2 col-md-offset-1 control-label">DNS3: </label>
+                            <div class="col-md-7">
+                                {{ form_widget(form.dns3.dns) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-md-2 col-md-offset-1 control-label">DNS4: </label>
+                            <div class="col-md-7">
+                                {{ form_widget(form.dns4.dns) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-md-2 col-md-offset-1 control-label">DNS5: </label>
+                            <div class="col-md-7">
+                                {{ form_widget(form.dns5.dns) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="timeline-item bg-white">
+                <h3 class="timeline-header">
+                    Pago
+                </h3>
+                <div id="pago_dominio" class="timeline-body hide">
+                    Dominio = <span id="monto_dominio">xx.xx</span>
+                </div>
+                <div id="pago_host" class="timeline-body hide">
+                    Hosting = <span id="monto_host">xx.xx</span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="timeline-item bg-gray">
+                <h3 class="timeline-header">
+                    {{ form_rest(form) }}
+                    <a>&nbsp;</a>
+                </h3>
+            </div>
+        </li>
+
+        <li class="time-label">
+            <span class="bg-green">
+
+            </span>
+            <span class="bg-red">
+
+            </span>
+
+        </li>
+    </ul>
+    </form>
+</div>
+<!-- /.tab-pane -->

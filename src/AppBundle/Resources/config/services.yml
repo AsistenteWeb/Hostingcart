@@ -1,0 +1,16 @@
+services:
+    app.order:
+        class: AppBundle\Services\OrderManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @form.factory
+            - @router
+
+    app.domain:
+        class: AppBundle\Services\WhoisManager
+        arguments:
+            - @aw.whois
+            - @doctrine.orm.entity_manager
+
+    app.strong.password:
+        class: AppBundle\Services\StrongPasswords

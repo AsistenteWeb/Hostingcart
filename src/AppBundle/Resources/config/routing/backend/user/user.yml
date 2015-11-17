@@ -1,0 +1,28 @@
+backend_user_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Backend/User:index" }
+
+backend_usuario_edit:
+    path:     /{id}/users
+    defaults: { _controller: "AppBundle:Backend/User:edit" }
+
+backend_usuario_update:
+    path:     /{id}/usersupdate
+    defaults: { _controller: "AppBundle:Backend/User:update" }
+
+backend_usuario_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Backend/User:new" }
+
+backend_usuario_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Backend/User:create" }
+
+backend_usuario_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Backend/User:show" }
+
+
+backend_usuario_order:
+    resource: "@AppBundle/Resources/config/routing/backend/user/corder.yml"
+    prefix: /corder

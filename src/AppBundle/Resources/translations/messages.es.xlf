@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="es" datatype="plaintext" original="messages" date="2011-10-18T18:20:51Z" product-name="my-ext">
+        <body>
+            <trans-unit id="0">
+                <source>Username</source>
+                <target>Usuario</target>
+            </trans-unit>
+            <trans-unit id="1">
+                <source>First Name</source>
+                <target>Nombre</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Last Name</source>
+                <target>Apellido</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Email</source>
+                <target>Correo</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Phone</source>
+                <target>Teléfono</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Enable</source>
+                <target>Habilitado</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Customers</source>
+                <target>Clientes</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>New customer</source>
+                <target>Nuevo cliente</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

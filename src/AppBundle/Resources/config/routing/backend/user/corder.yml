@@ -1,0 +1,11 @@
+backend_user_corder_new:
+    path:      /{id}/new
+    defaults: { _controller: "AppBundle:Backend/User/Corder:newCorder" }
+
+backend_user_corder_create:
+    path:      /{id}/create
+    defaults: { _controller: "AppBundle:Backend/User/Corder:createCorder" }
+
+backend_user_register_corder:
+    path:      /{id}/register_corder
+    defaults: { _controller: "AppBundle:Backend/User/Corder:registerCorder" }

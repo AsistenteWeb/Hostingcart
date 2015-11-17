@@ -1,0 +1,63 @@
+{% extends 'AwBackendTemplateBundle::base.html.twig' %}
+
+{% block content_title %}{% trans %}Dominios Ofrecidos{% endtrans %}{% endblock content_title %}
+{% block breadcrumb %}
+    <div class="breadcrumb"><a href="{{ path('tld_new') }}" class="btn btn-block btn-success"> <i class="fa fa-plus"></i> {% trans %}Nuevo Dominio{% endtrans %}</a></div>
+{% endblock breadcrumb %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div id="list" class="box">
+                <div class="box-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>tld</th>
+                                <th>Registro</th>
+                                <th>Renovación</th>
+                                <th>Redención</th>
+                                <th>Habilitado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for tld in tlds %}
+                            <tr>
+                                <td>{{ tld.id }}</td>
+                                <td>{{ tld.tld }}</td>
+                                <td>{{ tld.register }}</td>
+                                <td>{{ tld.renew }}</td>
+                                <td>{{ tld.redemption }}</td>
+                                <td>{{ tld.enable ? 'si': 'no' }}</td>
+                                <td>
+                                    <form action="{{ path('tld_edit', { 'id': tld.id }) }}" method="get">
+                                        <button type="submit" class="btn btn-small">
+                                            <i class="ion-edit"></i> Editar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <!--
+    <script src="{{ asset('bundles/app/jquery_validator/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/jquery_validator/localization/messages_es.min.js') }}"></script>
+-->
+    <script>
+        $( document ).ready(function() {
+//            $("form").validate();
+            $( '#productos' ).addClass( 'active' );
+            $( '#productos_view' ).css( 'display', 'block' );
+            $( '#tld' ).addClass( 'active' );
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,28 @@
+AppBundle\Entity\Tld:
+  type: entity
+  repositoryClass: AppBundle\Entity\TldRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    tld:
+      type: string
+      nullable: false
+    enable:
+      type: boolean
+      nullable: true
+  oneToMany:
+    domainproduct:
+      targetEntity: Domainproduct
+      mappedBy: tld
+      cascade: [persist]
+  manyToOne:
+    domainprovider:
+      targetEntity: Domainprovider
+      inversedBy: tld
+      joinColumns:
+        domainprovider_id:
+          referencedColumnName: id
+          nullable: false

@@ -1,0 +1,29 @@
+AppBundle\Entity\Serverdomain:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    domain:
+      type: string
+      length: 255
+      nullable: false
+    begin:
+      type: date
+      nullable: false
+    expired:
+      type: date
+      nullable: false
+    status:
+      type: string
+      length: 255
+      nullable: false
+  oneToMany:
+    domaincontact:
+      targetEntity: Domaincontact
+      mappedBy: serverdomain
+    domaindns:
+      targetEntity: Domaindns
+      mappedBy: serverdomain

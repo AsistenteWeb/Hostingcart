@@ -1,0 +1,26 @@
+domainprovider:
+    path:     /
+    defaults: { _controller: "AppBundle:Backend/Domainprovider:index" }
+
+domainprovider_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Backend/Domainprovider:new" }
+
+domainprovider_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Backend/Domainprovider:create" }
+    methods:  POST
+
+domainprovider_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Backend/Domainprovider:edit" }
+
+domainprovider_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Backend/Domainprovider:update" }
+    methods:  [POST, PUT]
+
+domainprovider_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Backend/Domainprovider:delete" }
+    methods:  [POST, DELETE]

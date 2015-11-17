@@ -1,0 +1,3 @@
+services:
+   aw.whois:
+       class: Aw\WhoisBundle\Whois\AwWhois

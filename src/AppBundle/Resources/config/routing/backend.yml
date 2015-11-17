@@ -1,0 +1,28 @@
+back_index:
+    path:     /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    AwBackendTemplateBundle::index.html.twig
+user:
+    resource: "@AppBundle/Resources/config/routing/backend/user/user.yml"
+    prefix: /user
+
+app_hostingplan:
+    resource: "@AppBundle/Resources/config/routing/backend/hostingplan.yml"
+    prefix:   /hostingplan
+
+app_domain:
+    resource: "@AppBundle/Resources/config/routing/backend/tld.yml"
+    prefix:   /tld
+
+app_domainprovider:
+    resource: "@AppBundle/Resources/config/routing/backend/domainprovider.yml"
+    prefix:   /domainprovider
+
+app_dnsdefault:
+    resource: "@AppBundle/Resources/config/routing/backend/dnsdefault.yml"
+    prefix:   /dnsdefault
+
+app_whois_domain:
+    resource: "@AppBundle/Resources/config/routing/backend/whoisdomain.yml"
+    prefix:   /whoisdomain

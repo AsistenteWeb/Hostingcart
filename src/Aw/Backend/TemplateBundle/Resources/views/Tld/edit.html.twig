@@ -1,0 +1,53 @@
+{% extends 'AwBackendTemplateBundle::base.html.twig' %}
+
+{% block content_title %}{% trans %}Nuevo Plan de Hosting{% endtrans %}{% endblock content_title %}
+
+{% block flasherror %}
+    {% if formuser.errors(true).count > 0 %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div role="alert" class="alert alert-danger">
+                    <span class="help-block">
+                        <ul class="list-unstyled alert-danger">
+                            {% for error in formuser.errors(true) %}
+                                <li>
+                                    <span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock flasherror %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box-body">
+                            {{ form(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/.col (left) -->
+{% endblock %}
+{% block scripts %}
+    <!--
+    <script src="{{ asset('bundles/app/jquery_validator/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/jquery_validator/localization/messages_es.min.js') }}"></script>
+-->
+    <script>
+        $( document ).ready(function() {
+//            $("form").validate();
+            $( '#productos' ).addClass( 'active' );
+            $( '#productos_view' ).css( 'display', 'block' );
+            $( '#hosting' ).addClass( 'active' );
+        });
+    </script>
+{% endblock %}

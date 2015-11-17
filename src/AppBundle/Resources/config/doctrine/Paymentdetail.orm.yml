@@ -1,0 +1,28 @@
+AppBundle\Entity\Paymentdetail:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    Description:
+      type: text
+      nullable: true
+    corderproduct_id:
+      type: integer
+      nullable: true
+    price:
+      type: decimal
+      nullable: true
+      scale: 2
+    tax:
+      type: integer
+      nullable: true
+  manyToOne:
+    payment:
+      targetEntity: Payment
+      inversedBy: paymentdetail
+      joinColumns:
+        payment_id:
+          referencedColumnName: id

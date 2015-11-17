@@ -1,0 +1,76 @@
+{% if corders is empty %}
+<div class="corder">No existen ordenes</div>
+{% else %}
+    {% for corder in corders %}
+        <!-- /.tab-pane -->
+        <div class="tab-pane" id="timeline">
+            <!-- The timeline -->
+            <ul class="timeline timeline-inverse">
+                <!-- timeline time label -->
+                <li class="time-label">
+                        <span class="bg-blue">
+                          Orden N° {{ corder.id }}
+                        </span>
+                </li>
+                <li>
+                    <i class="fa fa-bars bg-blue"></i>
+
+                    <div class="timeline-item">
+                        {% if corder.corderdomain.domain is defined %}
+                            {% set domainPrice = corder.corderdomain.price %}
+                            <span class="time"><i class="fa fa-money"></i> {{ domainPrice|number_format(2) }}</span>
+                            <h3 class="timeline-header"><a href="#">Dominio </a> {{ corder.corderdomain.domain }}{{ corder.corderdomain.domainproduct.tld.tld }}</h3>
+
+                            <div class="timeline-body">
+                                <a class="btn btn-primary btn-xs">Registrar</a>
+                                <a class="btn btn-warning btn-xs">Cambiar DNS</a>
+                                <a class="btn btn-danger btn-xs">Cambiar Contactos</a>
+                            </div>
+                        {% else %}
+                            {% set domainPrice = 0 %}
+                        {% endif %}
+
+                        {% if corder.corderhosting.hostingproduct is defined %}
+                            {% set hostingPrice = corder.corderhosting.price %}
+                            <span class="time"><i class="fa fa-money"></i> {{ hostingPrice|number_format(2) }}</span>
+                            <h3 class="timeline-header"><a href="#">Plan {{ corder.corderhosting.hostingproduct.hostingplan.plan }}</a> {{ corder.corderhosting.domaintld }}</h3>
+
+                            <div class="timeline-body">
+                                Usuario<br>
+                                Contraseña<br>
+                                <a class="btn btn-primary btn-xs">Cambiar contraseña</a>
+                                <a class="btn btn-warning btn-xs">Suspender</a>
+                                <a class="btn btn-danger btn-xs">Terminar</a>
+                            </div>
+                        {% else %}
+                            {% set hostingPrice = 0 %}
+                        {% endif %}
+                            <span class="time" style="font-size: 15px; color: #000"><i class="fa fa-money"></i> {{ (domainPrice + hostingPrice)|number_format(2) }}</span>
+                            <h3>&nbsp;</h3>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="timeline-item bg-gray">
+                        <h3 class="timeline-header">
+                            <a class="btn btn-primary btn-xs">Pagar</a>
+                            <a class="btn btn-warning btn-flat btn-xs">Revertir</a>
+                        </h3>
+                    </div>
+                </li>
+
+                <li class="time-label">
+                    <span class="bg-green">
+                      {{ corder.begindate|date('Y-m-d') }}
+                    </span>
+                    <span class="bg-red">
+                      {{ corder.enddate|date('Y-m-d') }}
+                    </span>
+
+                </li>
+            </ul>
+        </div>
+        <!-- /.tab-pane -->
+
+    {% endfor %}
+{% endif %}

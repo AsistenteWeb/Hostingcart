@@ -1,0 +1,26 @@
+tld:
+    path:     /
+    defaults: { _controller: "AppBundle:Backend/Tld:index" }
+
+tld_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Backend/Tld:new" }
+
+tld_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Backend/Tld:create" }
+    methods:  POST
+
+tld_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Backend/Tld:edit" }
+
+tld_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Backend/Tld:update" }
+    methods:  [POST, PUT]
+
+tld_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Backend/Tld:delete" }
+    methods:  [POST, DELETE]

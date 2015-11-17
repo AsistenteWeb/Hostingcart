@@ -1,0 +1,31 @@
+AppBundle\Entity\Hostingplan:
+  type: entity
+  repositoryClass: AppBundle\Entity\HostingplanRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    plan:
+      type: string
+      length: 255
+      nullable: false
+    alias:
+      type: string
+      length: 255
+      nullable: false
+    description:
+      type: text
+      nullable: true
+    disksize:
+      type: integer
+      nullable: false
+    bandwidth:
+      type: integer
+      nullable: false
+  oneToMany:
+    hostingproduct:
+      targetEntity: Hostingproduct
+      mappedBy: hostingplan
+      cascade: [persist]

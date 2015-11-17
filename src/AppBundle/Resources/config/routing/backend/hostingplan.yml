@@ -1,0 +1,26 @@
+hostingplan:
+    path:     /
+    defaults: { _controller: "AppBundle:Backend/Hostingplan:index" }
+
+hostingplan_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Backend/Hostingplan:new" }
+
+hostingplan_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Backend/Hostingplan:create" }
+    methods:  POST
+
+hostingplan_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Backend/Hostingplan:edit" }
+
+hostingplan_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Backend/Hostingplan:update" }
+    methods:  [POST, PUT]
+
+hostingplan_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Backend/Hostingplan:delete" }
+    methods:  [POST, DELETE]

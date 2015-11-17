@@ -1,0 +1,42 @@
+{% extends 'AwBackendTemplateBundle::base.html.twig' %}
+
+{% block content_title %}{% trans %}Nuevo Usuario{% endtrans %}{% endblock content_title %}
+
+{% block flasherror %}
+    {% if formuser.errors(true).count > 0 %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div role="alert" class="alert alert-danger">
+                    <span class="help-block">
+                        <ul class="list-unstyled alert-danger">
+                            {% for error in formuser.errors(true) %}
+                                <li>
+                                    <span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock flasherror %}
+
+{% block content %}
+    <div class="row">
+        <form action="{{ path('backend_usuario_create') }}" class="form-horizontal" method="post" role="form">
+            <!-- left column -->
+            {% include 'AwBackendTemplateBundle:User:_form.html.twig' %}
+        </form>
+    </div>   <!-- /.row -->
+{% endblock %}
+
+{% block scritp_one %}
+    <script src="{{ asset('bundles/app/jquery_validator/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/jquery_validator/localization/messages_es.min.js') }}"></script>
+    <script>
+        $( document ).ready(function() {
+            $("form").validate();
+        });
+    </script>
+{% endblock %}

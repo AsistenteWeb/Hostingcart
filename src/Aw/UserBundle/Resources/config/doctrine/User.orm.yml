@@ -1,0 +1,63 @@
+Aw\UserBundle\Entity\User:
+    type:  entity
+    table: User
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        firstname:
+            type: string
+            length: 255
+            nullable: false
+        lastname:
+            type: string
+            length: 255
+            nullable: false
+        company:
+            type: string
+            length: 255
+            nullable: true
+        address1:
+            type: string
+            length: 255
+            nullable: false
+        address2:
+            type: string
+            length: 255
+            nullable: true
+        country:
+            type: string
+            length: 255
+            nullable: true
+        state:
+            type: string
+            length: 255
+            nullable: true
+        city:
+            type: string
+            length: 255
+            nullable: true
+        zipcode:
+            type: string
+            length: 255
+            nullable: false
+        phonecc:
+            type: string
+            length: 7
+            nullable: false
+        phone:
+            type: string
+            length: 50
+            nullable: true
+    oneToMany:
+        corder:
+            orderBy: { 'id': 'DESC' }
+            targetEntity: AppBundle\Entity\Corder
+            mappedBy: user
+    oneToOne:
+        resellerclubuser:
+            targetEntity: AppBundle\Entity\Resellerclubuser
+            mappedBy: user

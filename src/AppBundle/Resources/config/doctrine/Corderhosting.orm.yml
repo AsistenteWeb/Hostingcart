@@ -1,0 +1,31 @@
+AppBundle\Entity\Corderhosting:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    domaintld:
+      type: string
+      nullable: true
+    price:
+      type: decimal
+      precision: 2
+    executed:
+      type: boolean
+      nullable: true
+  oneToOne:
+    corder:
+      targetEntity: Corder
+      inversedBy: corderhosting
+      joinColumn:
+        name: corder_id
+        referencedColumnName: id
+  manyToOne:
+    hostingproduct:
+      targetEntity: Hostingproduct
+      inversedBy: corderhosting
+      joinColumn:
+        name: hostingproduct_id
+        referencedColumnName: id

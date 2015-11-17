@@ -1,0 +1,61 @@
+AppBundle\Entity\Domaincontact:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    name:
+      type: string
+      length: 255
+      nullable: false
+    company:
+      type: string
+      length: 255
+      nullable: false
+    email:
+      type: string
+      length: 255
+      nullable: false
+    address_line_1:
+      type: string
+      length: 255
+      nullable: false
+    address_line_2:
+      type: string
+      length: 255
+      nullable: true
+    city:
+      type: string
+      length: 255
+      nullable: false
+    country:
+      type: string
+      length: 255
+      nullable: false
+    zipcode:
+      type: string
+      length: 255
+      nullable: false
+    phone_cc:
+      type: string
+      length: 255
+      nullable: false
+    phone:
+      type: string
+      length: 255
+      nullable: false
+  manyToOne:
+    domaincontactype:
+      targetEntity: Domaincontacttype
+      inversedBy: domaincontact
+      joinColumn:
+        name: domaincontacttype_id
+        referencedColumnName: id
+    serverdomain:
+      targetEntity: Serverdomain
+      inversedBy: domaincontact
+      joinColumn:
+        name: serverdomain_id
+        referencedColumnName: id

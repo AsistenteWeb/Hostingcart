@@ -1,0 +1,38 @@
+AppBundle\Entity\Hostingproduct:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    price:
+      type: decimal
+      scale: 2
+      nullable: false
+  oneToMany:
+    corderhosting:
+      targetEntity: Corderhosting
+      mappedBy: hostingproduct
+  manyToOne:
+    hostaction:
+      targetEntity: Hostaction
+      inversedBy: hostingproduct
+      joinColumns:
+        hostaction_id:
+          referencedColumnName: id
+          nullable: false
+    hostingplan:
+      targetEntity: Hostingplan
+      inversedBy: hostingproduct
+      joinColumns:
+        hostingplan_id:
+          referencedColumnName: id
+          nullable: false
+    product:
+      targetEntity: Product
+      inversedBy: hostingproduct
+      joinColumns:
+        product_id:
+          referencedColumnName: id
+          nullable: false

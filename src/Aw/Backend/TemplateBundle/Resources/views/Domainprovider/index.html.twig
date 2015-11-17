@@ -1,0 +1,46 @@
+{% extends 'AwBackendTemplateBundle::base.html.twig' %}
+
+{% block content_title %}{% trans %}Proveedores de Dominios{% endtrans %}{% endblock content_title %}
+
+{% block breadcrumb %}
+    <div class="breadcrumb"><a href="{{ path('domainprovider_new') }}" class="btn btn-block btn-success"> <i class="fa fa-plus"></i> {% trans %}Nuevo Proveedor de Dominios{% endtrans %}</a></div>
+{% endblock breadcrumb %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div id="list" class="box">
+                <div class="box-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Plan</th>
+                            <th>Module</th>
+                            <th>Api</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for provider in providers %}
+                            <tr>
+                                <td>{{ provider.id }}</td>
+                                <td>{{ provider.nameprovider }}</td>
+                                <td>{{ provider.module }}</td>
+                                <td>{{ provider.api }}</td>
+                                <td>
+                                    <form action="{{ path('domainprovider_edit', { 'id': provider.id }) }}" method="get">
+                                        <button type="submit" class="btn btn-small">
+                                            <i class="ion-edit"></i> Editar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div>
+{% endblock %}

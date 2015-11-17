@@ -1,0 +1,35 @@
+AppBundle\Entity\Payment:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    paymentinfo:
+      type: array
+      nullable: true
+  oneToMany:
+    paymentdetail:
+      targetEntity: Paymentdetail
+      mappedBy: payment
+  oneToOne:
+    corder:
+      targetEntity: Corder
+      inversedBy: payment
+      joinColumns:
+        corder_id:
+          referencedColumnName: id
+  manyToOne:
+    paymentmethod:
+      targetEntity: Paymentmethod
+      inversedBy: payment
+      joinColumns:
+        paymentmethod_id:
+          referencedColumnName: id
+    paymentstatus:
+      targetEntity: Paymentstatus
+      inversedBy: payment
+      joinColumns:
+        paymentstatus_id:
+          referencedColumnName: id

@@ -1,0 +1,26 @@
+dnsdefault:
+    path:     /
+    defaults: { _controller: "AppBundle:Backend/Dnsdefault:index" }
+
+dnsdefault_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Backend/Dnsdefault:new" }
+
+dnsdefault_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Backend/Dnsdefault:create" }
+    methods:  POST
+
+dnsdefault_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Backend/Dnsdefault:edit" }
+
+dnsdefault_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Backend/Dnsdefault:update" }
+    methods:  [POST, PUT]
+
+dnsdefault_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Backend/Dnsdefault:delete" }
+    methods:  [POST, DELETE]

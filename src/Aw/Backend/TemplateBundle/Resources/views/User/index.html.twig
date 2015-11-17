@@ -1,0 +1,273 @@
+{% extends 'AwBackendTemplateBundle::base.html.twig' %}
+
+{% block content_title %}{% trans %}Clientes{% endtrans %}{% endblock content_title %}
+{% block breadcrumb %}
+    <div class="breadcrumb"><a href="{{ path('backend_usuario_new') }}" class="btn btn-block btn-success"> <i class="fa fa-plus"></i> {% trans %}Nuevo Cliente{% endtrans %}</a></div>
+{% endblock breadcrumb %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <div id="TldListController" class="box">
+                <div class="box-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>{% trans %}Nombre{% endtrans %}</th>
+                            <th>{% trans %}Apellido{% endtrans %}</th>
+                            <th>{% trans %}Usuario{% endtrans %}</th>
+                            <th>{% trans %}Habilitado{% endtrans %}</th>
+                            <th> </th>
+                            <th> </th>
+                            <th> </th>
+                            <th> </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for entity in pagination %}
+                        <tr>
+                            <td>{{ entity.firstname }}</td>
+                            <td>{{ entity.lastname }}</td>
+                            <td>{{ entity.username }}</td>
+                            <td>{{ entity.enabled }}</td>
+                            <td>
+                                <form class="user_new_order" action="{{ path('backend_user_corder_new', { 'id': entity.id }) }}" method="get">
+                                    <button type="submit" class="btn btn-small">
+                                       <i class="ion-ios-cart"></i>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form class="user_show" action="{{ path('backend_usuario_show', { 'id': entity.id }) }}" method="get">
+                                    <button type="submit" class="btn btn-small">
+                                        <i class="ion-eye"></i>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{{ path('backend_usuario_edit', { 'id': entity.id }) }}" method="get">
+                                    <button type="submit" class="btn btn-small">
+                                        <i class="ion-edit"></i>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{{ path('backend_usuario_edit', { 'id': entity.id }) }}" method="get">
+                                    <button type="submit" class="btn btn-small">
+                                        <i class="ion-edit"></i> Editar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    {% if pagination.TotalItemCount > 0 %}
+                        {{ knp_pagination_render(pagination) }}
+                    {% endif %}
+                </div>
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+        <div id="show_result" class="col-md-4">asdf</div><!-- /.col -->
+    </div><!-- /.row -->
+{% endblock content %}
+
+{% block scripts %}
+    <script>
+        function hasAndAddClass(selector, css)
+        {
+            if(!$(selector).hasClass(css)) {
+                $(selector).addClass(css);
+            }
+        }
+
+        function hasAndRemoveClass(selector, css)
+        {
+            if($(selector).hasClass(css)) {
+                $(selector).removeClass(css);
+            }
+        }
+
+        function louver (body, button, button_icon) {
+            $( document ).on( "click", button, function() {
+                if ($(body).hasClass('hide') && $(button_icon).hasClass('fa-plus-circle')) {
+                    $(body).removeClass('hide');
+                    $(button_icon).removeClass('fa-plus-circle');
+                    $(button_icon).addClass('fa-minus-circle');
+                } else {
+                    $(body).addClass('hide');
+                    $(button_icon).removeClass('fa-minus-circle');
+                    $(button_icon).addClass('fa-plus-circle');
+                }
+            });
+        }
+
+        function loadNewOrder()
+        {
+            $( "form.user_show, form.user_new_order" ).submit(function( event ) {
+                event.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    data: $(this).serialize(),
+                    url:  $(this).attr('action'),
+                    success: function(data){
+                        $('#show_result').html(data);
+                    },
+                    error: function(){
+                        alert('Hubo un error interno');
+                    }
+                });
+            });
+        }
+
+        function changeDomainAction()
+        {
+            $( document ).on( "click", "input[type=radio][name='appbundle_corder[register]']", function() {
+                displayActionButtons($('#appbundle_corder_corderhosting_hostingproduct'), $("input[type=radio][name='appbundle_corder[register]']:checked"));
+            });
+        }
+
+        function changeHostingAction()
+        {
+            $( document ).on('change', '#appbundle_corder_corderhosting_hostingproduct', function() {
+                displayActionButtons($('#appbundle_corder_corderhosting_hostingproduct'), $("input[type=radio][name='appbundle_corder[register]']:checked"));
+            });
+        }
+
+        function verifyDomainAvailability()
+        {
+            $( document ).on('click', '#verify_domain', function(event) {
+                $('#verify_domain').hide();
+                event.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    data: {
+                        'domain': $('#appbundle_corder_domain').val()
+                    },
+                    url:  '{{ path('whoisdomain_register_availability') }}',
+                    success: function(data){
+
+                        if (data.status == 0) {
+                            $(':root #verify_response').html('<code>'+  data.message + '</code>');
+                        }
+
+                        if (data.status == 1) {
+                            if (data.response == '1') {
+                                text_response =  '<p id="message" class="text-green">El dominio está disponible</p>';
+                                if ($('#pago_dominio').hasClass('hide')) {
+                                    $('#pago_dominio').removeClass('hide');
+                                }
+                            } else {
+                                text_response =  '<p id="message" class="text-red">El dominio <strong>NO</strong> está disponible</p>';
+                            }
+
+                            text_price = data.price;
+                            $(':root #verify_response').html(text_response);
+                            $(':root #monto_dominio').html(text_price);
+                            $('#message').show();
+                        }
+                    },
+                    error: function( jqXHR, textStatus) {
+                        $(':root #verify_response').html('<p id="message" class="text-red error">'+  textStatus + '</p>');
+                    }
+                });
+            });
+        }
+
+        function changeDomainName()
+        {
+            $( document ).on('keyup', '#appbundle_corder_domain', function(event) {
+                $('#verify_domain').show();
+                hasAndAddClass('#message', 'hide');
+                $(':root #verify_response').html('');
+            });
+        }
+
+        function displayActionButtons(select, radiobutton)
+        {
+            if (radiobutton.val() == '') {
+                hasAndAddClass('#verify_domain', 'hide');
+                hasAndAddClass('#verify_transfer_domain', 'hide');
+                hasAndAddClass('#message', 'hide');
+                hasAndAddClass('#cod_autorization', 'hide');
+            }
+
+            if (radiobutton.val() == 1) {
+                hasAndRemoveClass('#verify_domain', 'hide');
+                hasAndAddClass('#verify_transfer_domain', 'hide');
+                hasAndAddClass('#cod_autorization', 'hide');
+
+                hasAndRemoveClass('#appbundle_corder_register_domain_action', 'hide');
+                hasAndRemoveClass('#appbundle_corder_register_domain_and_pay_action', 'hide');
+
+                hasAndAddClass('#appbundle_corder_register_hosting_action', 'hide');
+                hasAndAddClass('#appbundle_corder_register_hosting_and_pay_action', 'hide');
+
+                hasAndRemoveClass('#appbundle_corder_register_domain_and_hosting_action', 'hide');
+                hasAndRemoveClass('#appbundle_corder_register_domain_and_hosting_and_pay_action', 'hide');
+            }
+
+            if (radiobutton.val() == 2) {
+                hasAndRemoveClass('#cod_autorization', 'hide');
+                hasAndRemoveClass('#verify_transfer_domain', 'hide');
+
+                hasAndAddClass('#verify_domain', 'hide');
+
+                hasAndAddClass('#appbundle_corder_register_domain_action', 'hide');
+                hasAndAddClass('#appbundle_corder_register_domain_and_pay_action', 'hide');
+
+                hasAndRemoveClass('#appbundle_corder_register_hosting_action', 'hide');
+                hasAndRemoveClass('#appbundle_corder_register_hosting_and_pay_action', 'hide');
+
+                hasAndAddClass('#appbundle_corder_register_domain_and_hosting_action', 'hide');
+                hasAndAddClass('#appbundle_corder_register_domain_and_hosting_and_pay_action', 'hide');
+            }
+        }
+
+        function sendCorderForm()
+        {
+            $( document ).on('click', '#appbundle_corder_register_domain_action', function(event) {
+                event.preventDefault();
+
+                $('#form_corder').append(
+                        $("<input>").attr("type", "hidden").attr("name", $(this).attr('name')).val("")
+                );
+
+                $.ajax({
+                    type: "POST",
+                    data: $('#form_corder').serialize(),
+                    url:  $('#form_corder').attr('action'),
+                    success: function(data){
+                        $('#show_result').html(data);
+                    },
+                    error: function(){
+                        alert('Hubo un error interno');
+                    }
+                });
+            });
+        }
+    </script>
+
+    <script>
+        $( document ).ready(function(){
+            louver('#advanced_body', '#advanced_button', '#advanced_button .time i');
+            louver('#domain_body', '#domain_data_button', '#domain_data_button .time i');
+            louver('#domain_dns_body', '#domain_dns_button', '#domain_dns_button .time i');
+
+            louver('#contact_register_body', '#contact_register_button', '#contact_register_button .time i');
+            louver('#contact_administrative_body', '#contact_administrative_button', '#contact_administrative_button .time i');
+            louver('#contact_billing_body', '#contact_billing_button', '#contact_billing_button .time i');
+            louver('#contact_technical_body', '#contact_technical_button', '#contact_technical_button .time i');
+
+            loadNewOrder();
+            changeDomainAction();
+            changeHostingAction();
+            changeDomainName();
+            verifyDomainAvailability();
+
+            sendCorderForm();
+        });
+    </script>
+{% endblock scripts %}

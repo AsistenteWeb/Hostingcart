@@ -1,0 +1,58 @@
+{% extends 'AwBackendTemplateBundle::base.html.twig' %}
+
+{% block content_title %}{% trans %}DNS's por Defecto{% endtrans %}{% endblock content_title %}
+{% block breadcrumb %}
+    <div class="breadcrumb"><a href="{{ path('dnsdefault_new') }}" class="btn btn-block btn-success"> <i class="fa fa-plus"></i> {% trans %}Nuevo DNS{% endtrans %}</a></div>
+{% endblock breadcrumb %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div id="list" class="box">
+            <div class="box-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>DNS's</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for dns in dnss %}
+                        <tr>
+                            <td>{{ dns.id }}</td>
+                            <td>{{ dns.dns }}</td>
+                            <td>
+                                <form action="{{ path('dnsdefault_edit', { 'id': dns.id }) }}" method="get">
+                                    <button type="submit" class="btn btn-small">
+                                        <i class="ion-edit"></i> Editar
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <!--
+    <script src="{{ asset('bundles/app/jquery_validator/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/jquery_validator/localization/messages_es.min.js') }}"></script>
+-->
+    <script>
+        $( document ).ready(function() {
+//            $("form").validate();
+            $( '#productos' ).addClass( 'active' );
+            $( '#productos_view' ).css( 'display', 'block' );
+            $( '#hosting' ).addClass( 'active' );
+        });
+    </script>
+{% endblock %}

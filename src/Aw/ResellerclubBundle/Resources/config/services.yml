@@ -1,0 +1,13 @@
+#services:
+#    aw.resellerclub.connect:
+#        class: Aw\ResellerclubBundle\Services\Connect
+#            arguments:
+#                - %reseller.test%
+#                - %reseller.auth-userid%
+#                - %reseller.api-key%
+
+
+#    aw.resellerclub.domain.contact:
+#        class: Aw\ResellerclubBundle\Services\DomainContact
+#        arguments:
+#            - @doctrine.orm.entity_manager

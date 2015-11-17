@@ -1,0 +1,5 @@
+app_index:
+    path:     /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    AwFrontendTemplateBundle::index.html.twig

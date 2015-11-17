@@ -1,0 +1,19 @@
+{
+  "name": "asistenteweb/frontend-template-bundle",
+  "license": "MIT",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Yamir Ramirez",
+      "email": "ysramirez@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Aw\\": "Aw/"
+    }
+  },
+  "require": {
+    "components/bootstrap": "^3.3"
+  }
+}

@@ -1,0 +1,41 @@
+AppBundle\Entity\Corder:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    begindate:
+      type: date
+      nullable: false
+    enddate:
+      type: date
+      nullable: false
+    autorenew:
+      type: boolean
+      nullable: false
+    createdAt:
+      type: datetime
+      nullable: false
+  oneToOne:
+    payment:
+      targetEntity: Payment
+      mappedBy: corder
+    corderhosting:
+      targetEntity: Corderhosting
+      mappedBy: corder
+      cascade: [ persist ]
+    corderdomain:
+      targetEntity: Corderdomain
+      mappedBy: corder
+      cascade: [ persist ]      
+  manyToOne:
+    user:
+      targetEntity: Aw\UserBundle\Entity\User
+      inversedBy: corder
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+  lifecycleCallbacks:
+    prePersist: [ createdAt ]

@@ -1,0 +1,4 @@
+whoisdomain_register_availability:
+    path:     /
+    defaults: { _controller: "AppBundle:Backend/Whoisdomain:registeravailability" }
+    condition: "request.isXmlHttpRequest()"

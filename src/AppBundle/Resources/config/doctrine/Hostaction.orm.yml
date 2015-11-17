@@ -1,0 +1,18 @@
+AppBundle\Entity\Hostaction:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    nameaction:
+      type: string
+      nullable: true
+    alias:
+      type: string
+      nullable: true
+  oneToMany:
+    hostingproduct:
+      targetEntity: Hostingproduct
+      mappedBy: hostaction
