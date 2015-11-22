@@ -1,0 +1,3 @@
+frontend_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Frontend/Index:index" }

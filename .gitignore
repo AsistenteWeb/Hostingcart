@@ -1,4 +1,4 @@
-.idea
+       .idea
 /app/bootstrap.php.cache
 /app/cache/*
 !app/cache/.gitkeep
@@ -12,3 +12,4 @@
 /web/bundles/
 *~
 composer.lock
+src/Aw/Frontend/TemplateBundle/Resources/views/index.html.twig
