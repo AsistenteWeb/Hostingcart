@@ -103,17 +103,16 @@
                                             <img src="images/home/product1.jpg" alt="" />
                                             <p>{{ hostingplan.plan }}</p>
                                             <h2>$ {{ hostingplan.register }}</h2>
-                                            <h2>{{ dump(hostingplan) }}</h2>
-                                            <p><strong>Espacio: </strong>Easy Polo Black Edition<br>
-                                                <strong>Transferencia: </strong> Easy Polo Black Edition</p>
+                                            <p><strong>Espacio: </strong>{{ hostingplan.disksize }} MB<br>
+                                                <strong>Transferencia: </strong>{{ hostingplan.bandwidth }} MB</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir a la cesta</a>
                                         </div>
                                         <div class="product-overlay">
                                             <div class="overlay-content">
                                                 <p>{{ hostingplan.plan }}</p>
-                                                <h2>$  c    {{ hostingplan.register }}</h2>
-                                                <p>Easy Polo Black Edition<br>
-                                                    Easy Polo Black Edition</p>
+                                                <h2>{{ hostingplan.register }}</h2>
+                                                <p><strong>Espacio: </strong>{{ hostingplan.disksize }} MB<br>
+                                                    <strong>Transferencia: </strong>{{ hostingplan.bandwidth }} MB</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir a la cesta</a>
                                             </div>
                                         </div>

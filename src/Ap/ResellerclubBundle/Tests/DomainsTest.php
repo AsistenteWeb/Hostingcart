@@ -38,7 +38,7 @@ class DomainsTest extends WebTestCase
         $this->resellerClub->setOperation($registerDomain, $registerDomain->getExtraData());
         $response = json_decode($this->resellerClub->exec(), true);
         $this->checkError($response);
-        ladybug_dump($response);
+//        ladybug_dump($response);
         $this->assertEquals('Success', $response['actionstatus']);
     }
 
@@ -78,7 +78,7 @@ class DomainsTest extends WebTestCase
         $renewDomain = new DomainRenew($domainResponse['orders.orderid'], 1, $domainResponse['orders.endtime'], 'NoInvoice');
         $this->resellerClub->setOperation($renewDomain);
         $response = json_decode($this->resellerClub->exec(), true);
-        ladybug_dump($response);
+//        ladybug_dump($response);
     }
 
     private function checkError($response)
