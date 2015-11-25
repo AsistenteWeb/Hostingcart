@@ -1,6 +1,6 @@
 .idea
 /app/bootstrap.php.cache
-/app/cache/*
+/app/cache/
 !app/cache/.gitkeep
 /app/config/parameters.yml
 /app/logs/*
@@ -12,4 +12,3 @@
 /web/bundles/
 *~
 composer.lock
-src/Aw/Frontend/TemplateBundle/Resources/views/index.html.twig
