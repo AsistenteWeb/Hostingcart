@@ -1,9 +1,7 @@
-#app_index:
-#    path:     /
-#    defaults:
-#        _controller: FrameworkBundle:Template:template
-#        template:    AwFrontendTemplateBundle::index.html.twig
-
 frontend:
     resource: "@AppBundle/Resources/config/routing/frontend/index.yml"
     prefix: /
+
+frontend_minicart:
+    resource: "@AppBundle/Resources/config/routing/frontend/minicart.yml"
+    prefix: /cart
