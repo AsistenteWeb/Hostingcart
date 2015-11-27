@@ -8,9 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MinicartController extends Controller
 {
+	public function checkuserAction()
+	{
+
+	}
+
 	public function indexAction()
 	{
-//		$cart = $this->get('session')->has('cart') ? $this->get('session')->get('cart') : [];
+
 		return $this->render(
 			'AwFrontendTemplateBundle:Cart:index.html.twig'
 		);
