@@ -1,3 +1,7 @@
-frontend_cart_index:
-    path:     /
-    defaults: { _controller: "AppBundle:Frontend/Minicart:index" }
+frontend_cart_domainandhosting:
+    path:     /{id}/domainandhosting
+    defaults: { _controller: "AppBundle:Frontend/Minicart:domainandhosting" }
+
+frontend_cart_:
+    path:     /{id}/domain
+    defaults: { _controller: "AppBundle:Frontend/Minicart:domain" }

@@ -125,7 +125,7 @@
                                                 <h2>{{ hostingplan.register }}</h2>
                                                 <p><strong>Espacio: </strong>{{ hostingplan.disksize }} MB<br>
                                                     <strong>Transferencia: </strong>{{ hostingplan.bandwidth }} MB</p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir a la cesta</a>
+                                                <a href="{{ path('frontend_cart_domainandhosting',{'id' : hostingplan.id}) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir a la cesta</a>
                                             </div>
                                         </div>
                                     </div>

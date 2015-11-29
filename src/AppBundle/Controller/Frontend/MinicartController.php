@@ -13,7 +13,7 @@ class MinicartController extends Controller
 
 	}
 
-	public function indexAction()
+	public function domainandhostingAction()
 	{
 
 		return $this->render(
@@ -32,18 +32,13 @@ class MinicartController extends Controller
 
 	public function addAction(Request $request, $id)
 	{
-		$product = $this->getDoctrine()->getManager()->getRepository('AppBundle:Product')->find($id);
+		$user = $this->getDoctrine()->getRepository('AwUserBundle:User')->find($id);
 
-		$form = $this->createForm(new ProductType(), $product);
+		$order = $this->get('app.order')->createOrder($user);
+		$form = $this->get('app.order')->createForm($order, $user);
 
-		$form->handleRequest($request);
-
-		if ($form->isValid()) {
-			$cart = $this->get('session')->has('cart') ? $this->get('session')->get('cart') : [];
-			$cart[$product->getId()] = ['product' => $product, 'quantity' => $form->get('quantity')->getData()];
-			$this->get('session')->set('cart', $cart);
-		}
-		return $this->redirectToRoute('app_index');
+dump($form);
+die;
 	}
 
 	public function checkoutAction()
