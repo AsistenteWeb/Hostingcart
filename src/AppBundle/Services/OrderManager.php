@@ -24,7 +24,6 @@ class OrderManager
 		$this->router      = $router;
 	}
 
-
 	public function createOrder(User $user)
 	{
 		$corder = new Corder();

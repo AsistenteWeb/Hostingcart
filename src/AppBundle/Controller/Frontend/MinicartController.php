@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Frontend;
 
+use AppBundle\Form\Frontend\OrderType;
 use AppBundle\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,11 +14,17 @@ class MinicartController extends Controller
 
 	}
 
-	public function domainandhostingAction()
+	public function domainandhostingAction(Request $request, $id)
 	{
+		$orderType = new OrderType();
+
+		$form = $this->createForm($orderType);
 
 		return $this->render(
-			'AwFrontendTemplateBundle:Cart:index.html.twig'
+			'AwFrontendTemplateBundle:Cart:index.html.twig',
+			[
+				'form' => $form->createView()
+			]
 		);
 /*
 		return $this->render(
@@ -28,75 +35,5 @@ class MinicartController extends Controller
 			]
 		);
 */
-	}
-
-	public function addAction(Request $request, $id)
-	{
-		$user = $this->getDoctrine()->getRepository('AwUserBundle:User')->find($id);
-
-		$order = $this->get('app.order')->createOrder($user);
-		$form = $this->get('app.order')->createForm($order, $user);
-
-dump($form);
-die;
-	}
-
-	public function checkoutAction()
-	{
-		// todo your checkout method
-	}
-
-	public function updatequantitycartAction(Request $request)
-	{
-		$cart = $this->get('session')->get('cart');
-
-		$formCart = $this->getFormCart($cart);
-
-		$formCart->handleRequest($request);
-
-		if ($formCart->isValid()) {
-			foreach ($formCart->getData() as $productId => $product) {
-				$cart [$productId]['quantity'] = $formCart->get($productId)->get('quantity')->getData();
-			}
-			$this->get('session')->set('cart', $cart);
-		}
-		return $this->redirectToRoute('app_index');
-	}
-
-	public function emptyCartAction()
-	{
-		$this->get('session')->remove('cart');
-
-		return $this->redirectToRoute('app_index');
-	}
-
-	private function getFormProducts($products)
-	{
-		$formProducts = [];
-		foreach ($products  as $key => $product) {
-			$formProducts[$key] = $this->createForm(new ProductType(), $product);
-		}
-
-		return $formProducts;
-	}
-
-	private function getFormProductsViews($formProducts)
-	{
-		$formProductsViews = [];
-		foreach ($formProducts  as $key => $form) {
-			$formProductsViews[$key] = $form->createView();
-		}
-		return $formProductsViews;
-	}
-
-	private function getFormCart($cart)
-	{
-		$builder = $this->createFormBuilder();
-
-		foreach ($cart as $productId => $cartProduct) {
-			$builder->add($productId, new ProductType($cartProduct['quantity']), ['data' => $cartProduct['product']]);
-		}
-
-		return $builder->getForm();
 	}
 }

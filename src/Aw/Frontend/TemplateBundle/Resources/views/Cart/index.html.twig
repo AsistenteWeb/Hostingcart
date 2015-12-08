@@ -18,8 +18,11 @@
                     <tbody>
                         <tr>
                             <td class="cart_product">
-                                <input type="radio" name="sex" value="male" checked> Registrar un dominio<br>
-                                <input type="radio" name="sex" value="female"> Ya poseo mi propio dominio
+                                {{ form_widget(form.register) }}
+                                {{ form_widget(form.own_domain) }}
+                                {{ form_widget(form.custom_domain) }}
+                                {{ form_widget(form.tld) }}
+
                             </td>
                             <td>
                                 <input type="text">
@@ -46,6 +49,8 @@
                     <tbody>
                     <tr>
                         <td class="cart_product">
+                            {{ form_widget(form.hostingplan, { 'class': 'foobar' }) }}
+                            {{ form_rest(form) }}
                             <select>
                                 <option value="com">Basico</option>
                                 <option value="org">Estandar</option>
