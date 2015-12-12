@@ -49,8 +49,8 @@
                     <tbody>
                     <tr>
                         <td class="cart_product">
-                            {{ form_widget(form.hostingplan, { 'class': 'foobar' }) }}
-                            {{ form_rest(form) }}
+                            {{ form_widget(form.hostingplan, {'attr': {'class': 'foo'}}) }}
+
                             <select>
                                 <option value="com">Basico</option>
                                 <option value="org">Estandar</option>
@@ -72,8 +72,8 @@
                     <tbody>
                     <tr>
                         <td class="cart_product">
-                            <input type="radio" name="sex" value="male" checked> Paypal<br>
-                            <input type="radio" name="sex" value="female"> Pago en Efectivo
+                            {{ form_widget(form.payment) }}
+                            {{ form_rest(form) }}
                         </td>
                         <td></td>
                     </tr>
