@@ -33,8 +33,6 @@ class DomaincontactType extends AbstractType
             ->add('zipcode', 'text', ['label' => 'ZIP:', 'data' => $this->user->getZipcode() ])
             ->add('phone_cc', 'text', ['label' => '', 'data' => '' ])
             ->add('phone', 'text', ['label' => 'Teléfono:', 'data' => $this->user->getPhone() ])
-//            ->add('domaincontactype')
-//            ->add('serverdomain')
         ;
     }
     

@@ -1,4 +1,9 @@
 {% extends 'AwFrontendTemplateBundle::base.html.twig' %}
+
+{% block custom_stylesheets %}
+    <link href="{{ asset('bundles/awfrontendtemplate/main/custom_order.css') }}" rel="stylesheet">
+{% endblock custom_stylesheets %}
+
 {% block section_one %}
     <section id="cart_items">
         <div class="container">
@@ -17,21 +22,19 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="cart_product">
+                            <td class="cart_product_table">
                                 {{ form_widget(form.register) }}
-                                {{ form_widget(form.own_domain) }}
-                                {{ form_widget(form.custom_domain) }}
-                                {{ form_widget(form.tld) }}
-
-                            </td>
-                            <td>
-                                <input type="text">
-                                <input type="text">
-                                <select>
-                                    <option value="com">com</option>
-                                    <option value="org">org</option>
-                                    <option value="net">net</option>
-                                </select>
+                                <div id="custom_domain_tld">
+                                    <div id="custom_domain">
+                                        {{ form_widget(form.custom_domain) }}
+                                    </div>
+                                    <div id="owner_domain">
+                                        {{ form_widget(form.own_domain) }}
+                                    </div>
+                                    <div id="custom_tld">
+                                        {{ form_widget(form.tld) }}
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -49,12 +52,7 @@
                     <tbody>
                     <tr>
                         <td class="cart_product">
-                            {{ form_widget(form.hostingplan, {'attr': {'class': 'foo'}}) }}
-
-                            <select>
-                                <option value="com">Basico</option>
-                                <option value="org">Estandar</option>
-                            </select>
+                            {{ form_widget(form.hostingplan) }}
                         </td>
                         <td></td>
                     </tr>
@@ -73,7 +71,6 @@
                     <tr>
                         <td class="cart_product">
                             {{ form_widget(form.payment) }}
-                            {{ form_rest(form) }}
                         </td>
                         <td></td>
                     </tr>
@@ -83,6 +80,26 @@
 
 
             <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr class="cart_menu">
+                        <td colspan="6" class="image">4. Usuario</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="cart_product">
+                            {{ form_widget(form.clientregister) }}
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="table-responsive cart_info">
+<!--
                 <table class="table table-condensed">
                     <thead>
                     <tr class="cart_menu">
@@ -135,6 +152,7 @@
                     </tr>
                     </tbody>
                 </table>
+-->
             </div>
 
         </div>
@@ -144,77 +162,86 @@
     <section id="do_action">
         <div class="container">
             <div class="heading">
-                <h3>What would you like to do next?</h3>
+                <h3>Autenticaci&oacute;n</h3>
                 <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
             </div>
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="chose_area">
-                        <ul class="user_option">
-                            <li>
-                                <input type="checkbox">
-                                <label>Use Coupon Code</label>
-                            </li>
-                            <li>
-                                <input type="checkbox">
-                                <label>Use Gift Voucher</label>
-                            </li>
-                            <li>
-                                <input type="checkbox">
-                                <label>Estimate Shipping & Taxes</label>
-                            </li>
-                        </ul>
-                        <ul class="user_info">
-                            <li class="single_field">
-                                <label>Country:</label>
-                                <select>
-                                    <option>United States</option>
-                                    <option>Bangladesh</option>
-                                    <option>UK</option>
-                                    <option>India</option>
-                                    <option>Pakistan</option>
-                                    <option>Ucrane</option>
-                                    <option>Canada</option>
-                                    <option>Dubai</option>
-                                </select>
-
-                            </li>
-                            <li class="single_field">
-                                <label>Region / State:</label>
-                                <select>
-                                    <option>Select</option>
-                                    <option>Dhaka</option>
-                                    <option>London</option>
-                                    <option>Dillih</option>
-                                    <option>Lahore</option>
-                                    <option>Alaska</option>
-                                    <option>Canada</option>
-                                    <option>Dubai</option>
-                                </select>
-
-                            </li>
-                            <li class="single_field zip-field">
-                                <label>Zip Code:</label>
-                                <input type="text">
-                            </li>
-                        </ul>
-                        <a class="btn btn-default update" href="">Get Quotes</a>
-                        <a class="btn btn-default check_out" href="">Continue</a>
+                <div id="exits_client" class="col-sm-12">
+                    <div class="total_area">
+                        <div class="login_area">
+                            {{ form_row(form.username) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.password) }}
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div id="new_client" class="col-sm-12">
                     <div class="total_area">
+                        <div class="login_area">
+                        </div>
+                        {{ form_rest(form) }}
                         <ul>
                             <li>Cart Sub Total <span>$59</span></li>
                             <li>Eco Tax <span>$2</span></li>
                             <li>Shipping Cost <span>Free</span></li>
                             <li>Total <span>$61</span></li>
                         </ul>
-                        <a class="btn btn-default update" href="">Update</a>
-                        <a class="btn btn-default check_out" href="">Check Out</a>
                     </div>
                 </div>
+                <a class="btn btn-default update" href="">Get Quotes</a>
+                <a class="btn btn-default check_out" href="">Continue</a>
+
             </div>
         </div>
     </section><!--/#do_action-->
 {% endblock section_two %}
+
+{% block customscript %}
+<script>
+    function clientregister()
+    {
+        if($("input:radio[name='frontend_order[clientregister]']:checked").val() == 1) {
+            $("#new_client").hide();
+            $("#exits_client").show();
+        }
+
+        if($("input:radio[name='frontend_order[clientregister]']:checked").val() == 2) {
+            $("#exits_client").hide();
+            $("#new_client").show();
+        }
+    }
+
+    function domainregister()
+    {
+        if($("input:radio[name='frontend_order[register]']:checked").val() == 1) {
+            $("#frontend_order_own_domain").hide();
+            $("#frontend_order_custom_domain").show();
+            $("#frontend_order_tld").show();
+        }
+
+        if($("input:radio[name='frontend_order[register]']:checked").val() == 2) {
+            $("#frontend_order_own_domain").show();
+            $("#frontend_order_custom_domain").hide();
+            $("#frontend_order_tld").hide();
+        }
+    }
+
+    function init()
+    {
+        domainregister();
+    }
+
+    $( document ).ready(function() {
+        $("input:radio[name='frontend_order[register]']").on("change", function() {
+            domainregister();
+        });
+
+        $("input:radio[name='frontend_order[clientregister]']").on("change", function() {
+            clientregister();
+        });
+
+        init();
+    });
+</script>
+{% endblock %}

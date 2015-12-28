@@ -1754,7 +1754,10 @@ h2.title {
 .user_info > li > span {
 }
 
-.user_info input, select, textarea {
+.user_info input, select, textarea,
+select#frontend_order_tld,
+select#frontend_order_hostingplan
+{
   background: #F0F0E9;
   border:0;
   color: #696763;
@@ -2520,5 +2523,3 @@ h2.title {
 .contact-info .social-networks ul li a:hover{
   color: #FE980F;
 }
-
-

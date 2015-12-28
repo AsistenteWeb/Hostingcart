@@ -62,6 +62,18 @@ class OrderType extends AbstractType
 					'label' => 'Metodo de pago'
 				]
 			)
+			->add(
+				'clientregister',
+				'choice',
+				[
+					'choices' => ['1' => 'Ya soy cliente', '2' => 'Aun no tengo una cuenta de cliente'],
+					'mapped' => false,
+					'multiple' => false,
+					'expanded' => true,
+					'data' => '1',
+					'label' => 'cliente'
+				]
+			)
 		;
 	}
 
