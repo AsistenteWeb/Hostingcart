@@ -2,15 +2,21 @@
 
 {% block custom_stylesheets %}
     <link href="{{ asset('bundles/awfrontendtemplate/main/custom_order.css') }}" rel="stylesheet">
+    <style>
+        .cart_product_table {
+            margin-right: 70px;
+        }
+    </style>
 {% endblock custom_stylesheets %}
 
 {% block section_one %}
+    <form action="">
     <section id="cart_items">
         <div class="container">
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li class="active">Shopping Cart</li>
+                    <li><a href="#">Inicio</a></li>
+                    <li class="active">Carrito de Compra</li>
                 </ol>
             </div>
             <div class="table-responsive cart_info">
@@ -23,7 +29,9 @@
                     <tbody>
                         <tr>
                             <td class="cart_product_table">
-                                {{ form_widget(form.register) }}
+                                <div>
+                                    {{ form_widget(form.register) }}
+                                </div>
                                 <div id="custom_domain_tld">
                                     <div id="custom_domain">
                                         {{ form_widget(form.custom_domain) }}
@@ -88,7 +96,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="cart_product">
+                        <td class="cart_product_table">
                             {{ form_widget(form.clientregister) }}
                         </td>
                         <td></td>
@@ -96,65 +104,8 @@
                     </tbody>
                 </table>
             </div>
-
-
             <div class="table-responsive cart_info">
-<!--
-                <table class="table table-condensed">
-                    <thead>
-                    <tr class="cart_menu">
-                        <td colspan="6" class="image">4. Datos de Usuario</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div class="table-responsive cart_info">
-                                <table class="table table-condensed">
-                                    <thead>
-                                    <tr class="cart_menu">
-                                        <td colspan="6" class="image">No tengo una cuenta</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="cart_product">
-                                            Nombre <input type="text"><br>
-                                            Apellido <input type="text"><br>
-                                            Dirección <input type="text"><br>
-                                            Correo <input type="text">
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="table-responsive cart_info">
-                                <table class="table table-condensed">
-                                    <thead>
-                                    <tr class="cart_menu">
-                                        <td colspan="6" class="image">No tengo una cuenta</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="cart_product">
-                                            Usuario <input type="text"><br>
-                                            Contraseña <input type="text"><br>
-                                            <button>Ingresar</button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
--->
             </div>
-
         </div>
     </section> <!--/#cart_items-->
 {% endblock section_one %}
@@ -179,14 +130,53 @@
                 <div id="new_client" class="col-sm-12">
                     <div class="total_area">
                         <div class="login_area">
+                            {{ form_row(form.register_username) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.register_password) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.register_retype_password) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.name) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.company) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.email) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.address_line_1) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.address_line_2) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.city) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.country) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.zipcode) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.phone_cc) }}
+                        </div>
+                        <div class="login_area">
+                            {{ form_row(form.phone) }}
                         </div>
                         {{ form_rest(form) }}
+<!--
                         <ul>
                             <li>Cart Sub Total <span>$59</span></li>
                             <li>Eco Tax <span>$2</span></li>
                             <li>Shipping Cost <span>Free</span></li>
                             <li>Total <span>$61</span></li>
                         </ul>
+-->
                     </div>
                 </div>
                 <a class="btn btn-default update" href="">Get Quotes</a>
@@ -195,6 +185,7 @@
             </div>
         </div>
     </section><!--/#do_action-->
+    </form>
 {% endblock section_two %}
 
 {% block customscript %}
@@ -230,6 +221,7 @@
     function init()
     {
         domainregister();
+        clientregister();
     }
 
     $( document ).ready(function() {

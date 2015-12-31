@@ -14,6 +14,11 @@ class MinicartController extends Controller
 
 	}
 
+	public function proccessdomainandhosting(Request $request, $id)
+	{
+
+	}
+
 	public function domainandhostingAction(Request $request, $id)
 	{
 		$orderType = new OrderType();
@@ -25,11 +30,11 @@ class MinicartController extends Controller
 		if (!$securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
 			//show logging form and register form
 			$form
-				->add('username', 'text')
-				->add('password', 'password')
-				->add('register_username', 'text')
-				->add('register_password', 'password')
-				->add('register_retype_password', 'password')
+				->add('username', 'text', ['label' => 'Usuario:'])
+				->add('password', 'password', ['label' => 'Contraseña:'])
+				->add('register_username', 'text', ['label' => 'Usuario:'])
+				->add('register_password', 'password', ['label' => 'Contraseña:'])
+				->add('register_retype_password', 'password', ['label' => 'Escriba nuevamente la contraseña:'])
 
 				->add('name', 'text', ['label' => 'Nombre:'])
 				->add('company', 'text', ['label' => 'Empresa:'])
@@ -42,14 +47,12 @@ class MinicartController extends Controller
 				->add('phone_cc', 'text', ['label' => '', 'data' => '' ])
 				->add('phone', 'text', ['label' => 'Teléfono:'])
 			;
-			$logeado = 'undefined';
 		}
 
 		return $this->render(
 			'AwFrontendTemplateBundle:Cart:index.html.twig',
 			[
 				'form' => $form->createView(),
-				'logeado' => $logeado
 			]
 		);
 /*
