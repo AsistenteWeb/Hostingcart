@@ -29,14 +29,15 @@ class LoadDomainproductData extends AbstractFixture implements OrderedFixtureInt
 
         $a = 0;
         foreach($tdls as $tld) {
-            $this->createDomainProducts($manager, $tld, $a+13, $a+13, $a+13, $a+180, $a+13);
+            $this->createDomainProducts($manager, $tld, $a+13, $a+13, $a+180, $a+13, $a+13);
+            $a = $a+1;
         }
     }
 
     private function createDomainProducts(ObjectManager $manager, $extension, $registerPrice = 10, $renewPrice = 10, $redemptionPrice = 10, $transferPrice = 10, $changePrice = 10)
     {
         $domainProductRegister = new Domainproduct();
-        $domainProductRegister->setProduct('product_domain');
+        $domainProductRegister->setProduct($this->getReference('product_domain'));
         $domainProductRegister->setDomainaction($this->getReference('domain_action_register'));
         $domainProductRegister->setTld($this->getReference('tld_'.$extension));
         $domainProductRegister->setPrice($registerPrice);
@@ -44,7 +45,7 @@ class LoadDomainproductData extends AbstractFixture implements OrderedFixtureInt
         $manager->persist($domainProductRegister);
 
         $domainProductRenew = new Domainproduct();
-        $domainProductRenew->setProduct('product_domain');
+        $domainProductRenew->setProduct($this->getReference('product_domain'));
         $domainProductRenew->setDomainaction($this->getReference('domain_action_renew'));
         $domainProductRenew->setTld($this->getReference('tld_'.$extension));
         $domainProductRenew->setPrice($renewPrice);
@@ -52,7 +53,7 @@ class LoadDomainproductData extends AbstractFixture implements OrderedFixtureInt
         $manager->persist($domainProductRenew);
 
         $domainProductRedemption = new Domainproduct();
-        $domainProductRedemption->setProduct('product_domain');
+        $domainProductRedemption->setProduct($this->getReference('product_domain'));
         $domainProductRedemption->setDomainaction($this->getReference('domain_action_redemption'));
         $domainProductRedemption->setTld($this->getReference('tld_'.$extension));
         $domainProductRedemption->setPrice($redemptionPrice);
@@ -60,7 +61,7 @@ class LoadDomainproductData extends AbstractFixture implements OrderedFixtureInt
         $manager->persist($domainProductRedemption);
 
         $domainProductTransferfrom = new Domainproduct();
-        $domainProductTransferfrom->setProduct('product_domain');
+        $domainProductTransferfrom->setProduct($this->getReference('product_domain'));
         $domainProductTransferfrom->setDomainaction($this->getReference('domain_action_transferfrom'));
         $domainProductTransferfrom->setTld($this->getReference('tld_'.$extension));
         $domainProductTransferfrom->setPrice($transferPrice);
@@ -68,7 +69,7 @@ class LoadDomainproductData extends AbstractFixture implements OrderedFixtureInt
         $manager->persist($domainProductTransferfrom);
 
         $domainProductChange = new Domainproduct();
-        $domainProductChange->setProduct('product_domain');
+        $domainProductChange->setProduct($this->getReference('product_domain'));
         $domainProductChange->setDomainaction($this->getReference('domain_action_change'));
         $domainProductChange->setTld($this->getReference('tld_'.$extension));
         $domainProductChange->setPrice($changePrice);
