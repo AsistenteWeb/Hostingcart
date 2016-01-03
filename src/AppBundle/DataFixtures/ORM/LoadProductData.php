@@ -26,6 +26,9 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($dominio);
 
         $manager->flush();
+
+        $this->setReference('product_hosting', $hosting);
+        $this->setReference('product_domain', $dominio);
     }
 
     /**

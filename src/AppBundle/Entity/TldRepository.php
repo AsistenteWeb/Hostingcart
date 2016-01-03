@@ -43,4 +43,20 @@ class TldRepository extends EntityRepository
 			    ->getResult()
 			;
 	}
+
+	public function listTldRegisterPrices()
+	{
+		return
+			$this->getEntityManager()->createQueryBuilder()
+				->select('tld.id')
+				->addSelect('tld.tld')
+				->addSelect('domainproduct.price')
+				->from('AppBundle:Tld', 'tld')
+				->innerJoin('tld.domainproduct', 'domainproduct')
+				->innerJoin('domainproduct.domainaction', 'domainaction', 'WITH', "domainaction.alias = 'register'")
+				->orderBy('tld.tld')
+				->getQuery()
+				->getResult()
+			;
+	}
 }

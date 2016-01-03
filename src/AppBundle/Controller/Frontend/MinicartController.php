@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Frontend;
 use AppBundle\Form\Frontend\OrderType;
 use AppBundle\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class MinicartController extends Controller
@@ -14,21 +15,81 @@ class MinicartController extends Controller
 
 	}
 
-	public function proccessdomainandhosting(Request $request, $id)
+	public function proccessdomainandhostingAction(Request $request)
 	{
+		$form = $this->createForm(new OrderType());
+		$securityContext = $this->container->get('security.authorization_checker');
 
+		if (!$securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+			$form = $this->getForm($form);
+		}
+
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+
+			if ($form->get('register')->getData() == 1 || $form->get('register')->getData() == 2) {
+
+				if ($form->get('register')->getData() == 1) {
+					try {
+						$this->get('app.domain')->checkDomain($form->get('custom_domain')->getData().'.'.$form->get('tld')->getData());
+					} catch(\Exception $e) {
+						$form->get('custom_domain')->addError(new FormError($e->getMessage()));
+dump($form->get('custom_domain'));
+					}
+				}
+
+				if ($form->get('register')->getData() == 2) {
+
+				}
+
+			} else {
+				$form->get('register')->addError(new FormError('Debe seleccionar una opcion'));
+			}
+
+			if ($form->get('payment')->getData() == 1 || $form->get('payment')->getData() == 2) {
+
+			} else {
+				$form->get('payment')->addError(new FormError('Debe seleccionar un metodo de pago'));
+			}
+
+			if ($form->get('clientregister')->getData() == 1 || $form->get('clientregister')->getData() == 2) {
+
+			} else {
+				$form->get('clientregister')->addError(new FormError('Debe seleccionar una accion'));
+			}
+		}
+
+		return $this->render(
+			'AwFrontendTemplateBundle:Cart:index.html.twig',
+			[
+				'form' => $form->createView(),
+			]
+		);
 	}
 
 	public function domainandhostingAction(Request $request, $id)
 	{
-		$orderType = new OrderType();
-
-		$form = $this->createForm($orderType);
-
+		$form = $this->createForm(new OrderType());
 		$securityContext = $this->container->get('security.authorization_checker');
 
 		if (!$securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
-			//show logging form and register form
+			$form = $this->getForm($form);
+		}
+
+		return $this->render(
+			'AwFrontendTemplateBundle:Cart:index.html.twig',
+			[
+				'form' => $form->createView(),
+				'domain_prices' => json_encode($this->getDoctrine()->getRepository('AppBundle:Tld')->listTldRegisterPrices()),
+				'hosting_prices' => json_encode([])
+			]
+		);
+	}
+
+	public function getForm($form)
+	{
+		return
 			$form
 				->add('username', 'text', ['label' => 'Usuario:'])
 				->add('password', 'password', ['label' => 'Contraseña:'])
@@ -47,22 +108,5 @@ class MinicartController extends Controller
 				->add('phone_cc', 'text', ['label' => '', 'data' => '' ])
 				->add('phone', 'text', ['label' => 'Teléfono:'])
 			;
-		}
-
-		return $this->render(
-			'AwFrontendTemplateBundle:Cart:index.html.twig',
-			[
-				'form' => $form->createView(),
-			]
-		);
-/*
-		return $this->render(
-			'AppBundle:app:index.html.twig',
-			[
-				'formsCart' => $this->getFormCart($cart)->createView(),
-				'formProducts' => $this->getFormProductsViews($this->getFormProducts($this->getDoctrine()->getManager()->getRepository('AppBundle:Product')->findAll())),
-			]
-		);
-*/
 	}
 }

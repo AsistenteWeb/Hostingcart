@@ -43,6 +43,12 @@ class LoadDomainactionData extends AbstractFixture implements OrderedFixtureInte
         $manager->persist($actionChange);
 
         $manager->flush();
+
+        $this->setReference('domain_action_register', $actionRegister);
+        $this->setReference('domain_action_renew', $actionRenew);
+        $this->setReference('domain_action_redemption', $actionRedemption);
+        $this->setReference('domain_action_transferfrom', $actionTransferFrom);
+        $this->setReference('domain_action_change', $actionChange);
     }
 
     /**
@@ -54,5 +60,4 @@ class LoadDomainactionData extends AbstractFixture implements OrderedFixtureInte
     {
         return 1;
     }
-
 }

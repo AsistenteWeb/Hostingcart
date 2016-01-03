@@ -3,7 +3,7 @@ frontend_cart_domainandhosting:
     defaults: { _controller: "AppBundle:Frontend/Minicart:domainandhosting" }
 
 frontend_cart_proccess_domainandhosting:
-    path:     /{id}/proccessdomainandhosting
+    path:     /proccessdomainandhosting
     defaults: { _controller: "AppBundle:Frontend/Minicart:proccessdomainandhosting" }
 
 frontend_cart_:

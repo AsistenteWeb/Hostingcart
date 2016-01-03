@@ -28,8 +28,9 @@ class LoadTldData extends AbstractFixture implements OrderedFixtureInterface
             $domain->setDomainprovider($this->getReference('domainprovider'));
 
             $manager->persist($domain);
+            $manager->flush();
+            $this->setReference('tld_'.$tld, $domain);
         }
-        $manager->flush();
     }
 
     public function getOrder()

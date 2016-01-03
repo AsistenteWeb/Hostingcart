@@ -3,14 +3,27 @@
 {% block custom_stylesheets %}
     <link href="{{ asset('bundles/awfrontendtemplate/main/custom_order.css') }}" rel="stylesheet">
     <style>
-        .cart_product_table {
+        .cart_product_table
+        {
             margin-right: 70px;
+        }
+
+        .check_out
+        {
+            margin-top: 2px;
+            background-color: #003366;
+        }
+
+        div.error span
+        {
+            color: #FF0000;
         }
     </style>
 {% endblock custom_stylesheets %}
 
 {% block section_one %}
-    <form action="">
+{{ dump(domain_prices) }}
+    <form action="{{ path('frontend_cart_proccess_domainandhosting') }}" novalidate method="post">
     <section id="cart_items">
         <div class="container">
             <div class="breadcrumbs">
@@ -29,6 +42,7 @@
                     <tbody>
                         <tr>
                             <td class="cart_product_table">
+                                <div class="error">{{ form_errors(form.custom_domain) }}</div>
                                 <div>
                                     {{ form_widget(form.register) }}
                                 </div>
@@ -42,6 +56,11 @@
                                     <div id="custom_tld">
                                         {{ form_widget(form.tld) }}
                                     </div>
+<!--
+                                    <div>
+                                        <button id="verify_button" type="button" class="btn btn-default check_out" >Verificar</button>
+                                    </div>
+-->
                                 </div>
                             </td>
                         </tr>
@@ -81,6 +100,14 @@
                             {{ form_widget(form.payment) }}
                         </td>
                         <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Datos
+                        </td>
+                        <td>
+
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -179,9 +206,7 @@
 -->
                     </div>
                 </div>
-                <a class="btn btn-default update" href="">Get Quotes</a>
-                <a class="btn btn-default check_out" href="">Continue</a>
-
+                <button class="btn btn-default check_out">Enviar</button>
             </div>
         </div>
     </section><!--/#do_action-->
@@ -208,14 +233,26 @@
         if($("input:radio[name='frontend_order[register]']:checked").val() == 1) {
             $("#frontend_order_own_domain").hide();
             $("#frontend_order_custom_domain").show();
+            $("#verify_button").show();
             $("#frontend_order_tld").show();
         }
 
         if($("input:radio[name='frontend_order[register]']:checked").val() == 2) {
             $("#frontend_order_own_domain").show();
             $("#frontend_order_custom_domain").hide();
+            $("#verify_button").hide();
             $("#frontend_order_tld").hide();
         }
+    }
+
+    function paymethod()
+    {
+        if($("input:radio[name='frontend_order[payment]']:checked").val() == 1) {
+        }
+
+        if($("input:radio[name='frontend_order[payment]']:checked").val() == 2) {
+        }
+
     }
 
     function init()
