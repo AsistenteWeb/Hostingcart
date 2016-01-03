@@ -9,8 +9,9 @@ AppBundle\Entity\Domainproduct:
         strategy: AUTO
     price:
       type: decimal
-      precision: 2
-      nullable: true
+      precision: 7
+      scale: 2
+      nullable: false
   oneToMany:
     corderdomain:
       targetEntity: Corderdomain
