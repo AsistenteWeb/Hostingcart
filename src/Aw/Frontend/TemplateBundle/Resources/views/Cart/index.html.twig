@@ -63,6 +63,7 @@
 -->
                                 </div>
                             </td>
+                            <td><span id="domain_cost">0</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -235,6 +236,8 @@
             $("#frontend_order_custom_domain").show();
             $("#verify_button").show();
             $("#frontend_order_tld").show();
+
+            domain_price();
         }
 
         if($("input:radio[name='frontend_order[register]']:checked").val() == 2) {
@@ -242,6 +245,8 @@
             $("#frontend_order_custom_domain").hide();
             $("#verify_button").hide();
             $("#frontend_order_tld").hide();
+
+            $("#domain_cost").text('0.00')
         }
     }
 
@@ -253,6 +258,16 @@
         if($("input:radio[name='frontend_order[payment]']:checked").val() == 2) {
         }
 
+    }
+
+    function domain_price()
+    {
+        $.each({{ domain_prices | raw }}, function(index, value) {
+            var id = $("#frontend_order_tld option:selected").val();
+            if (value['id'] == id) {
+                $("#domain_cost").text(value['price']);
+            }
+        });
     }
 
     function init()
@@ -268,6 +283,10 @@
 
         $("input:radio[name='frontend_order[clientregister]']").on("change", function() {
             clientregister();
+        });
+
+        $('#frontend_order_tld').on("change", function(){
+            domain_price();
         });
 
         init();
