@@ -43,6 +43,12 @@ class LoadHostingactionData extends AbstractFixture implements OrderedFixtureInt
         $manager->persist($actionChange);
 
         $manager->flush();
+
+        $this->setReference('hosting_action_register', $actionRegister);
+        $this->setReference('hosting_action_renew', $actionRenew);
+        $this->setReference('hosting_action_suspend', $actionSuspend);
+        $this->setReference('hosting_action_terminate', $actionTerminate);
+        $this->setReference('hosting_action_change', $actionChange);
     }
 
     /**
