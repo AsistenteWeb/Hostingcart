@@ -6,6 +6,7 @@
         .cart_product_table
         {
             margin-right: 70px;
+            width: 700px;
         }
 
         .check_out
@@ -18,11 +19,17 @@
         {
             color: #FF0000;
         }
+
+        #domain_cost, #hosting_cost, #total_to_pay, .currency
+        {
+            color: #003366;
+            font-size: 25px;
+        }
     </style>
 {% endblock custom_stylesheets %}
 
 {% block section_one %}
-{{ dump(domain_prices) }}
+{{ dump(hosting_prices) }}
     <form action="{{ path('frontend_cart_proccess_domainandhosting') }}" novalidate method="post">
     <section id="cart_items">
         <div class="container">
@@ -63,7 +70,7 @@
 -->
                                 </div>
                             </td>
-                            <td><span id="domain_cost">0</span></td>
+                            <td><span class="currency">$</span><span id="domain_cost">0</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -79,10 +86,12 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="cart_product">
+                        <td class="cart_product_table">
                             {{ form_widget(form.hostingplan) }}
                         </td>
-                        <td></td>
+                        <td>
+                            <span class="currency">$</span><span id="hosting_cost">0</span>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -97,10 +106,10 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="cart_product">
+                        <td class="cart_product_table">
                             {{ form_widget(form.payment) }}
                         </td>
-                        <td></td>
+                        <td><span class="currency">Total a pagar:  $</span><span id="total_to_pay">0</span></td>
                     </tr>
                     <tr>
                         <td>
@@ -260,6 +269,11 @@
 
     }
 
+    function total_to_pay()
+    {
+        $("#total_to_pay").text((parseInt($("#domain_cost").text()) + parseInt($("#hosting_cost").text())).toFixed(2));
+    }
+
     function domain_price()
     {
         $.each({{ domain_prices | raw }}, function(index, value) {
@@ -268,12 +282,25 @@
                 $("#domain_cost").text(value['price']);
             }
         });
+        total_to_pay();
+    }
+
+    function hosting_price()
+    {
+        $.each({{ hosting_prices | raw }}, function(index, value) {
+            var id = $("#frontend_order_hostingplan option:selected").val();
+            if (value['id'] == id) {
+                $("#hosting_cost").text(value['price']);
+            }
+        });
+        total_to_pay();
     }
 
     function init()
     {
         domainregister();
         clientregister();
+        hosting_price();
     }
 
     $( document ).ready(function() {
@@ -287,6 +314,10 @@
 
         $('#frontend_order_tld').on("change", function(){
             domain_price();
+        });
+
+        $('#frontend_order_hostingplan').on("change", function(){
+            hosting_price();
         });
 
         init();

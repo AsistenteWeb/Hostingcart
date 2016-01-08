@@ -27,4 +27,18 @@ class HostingplanRepository extends EntityRepository
 				->getResult()
 		;
 	}
+
+	public function listHostingRegisterPrices()
+	{
+		return
+			$this->getEntityManager()->createQueryBuilder()
+				->select('hostingplan.id')
+				->addSelect('hostingproduct.price')
+				->from('AppBundle:Hostingplan', 'hostingplan')
+				->innerJoin('hostingplan.hostingproduct', 'hostingproduct')
+				->innerJoin('hostingproduct.hostaction', 'hostaction', 'WITH', "hostaction.alias = 'register' ")
+				->getQuery()
+				->getResult()
+			;
+	}
 }

@@ -64,6 +64,8 @@ dump($form->get('custom_domain'));
 			'AwFrontendTemplateBundle:Cart:index.html.twig',
 			[
 				'form' => $form->createView(),
+				'domain_prices' => json_encode($this->getDoctrine()->getRepository('AppBundle:Tld')->listTldRegisterPrices()),
+				'hosting_prices' => json_encode($this->getDoctrine()->getRepository('AppBundle:Hostingplan')->listHostingRegisterPrices())
 			]
 		);
 	}
@@ -82,7 +84,7 @@ dump($form->get('custom_domain'));
 			[
 				'form' => $form->createView(),
 				'domain_prices' => json_encode($this->getDoctrine()->getRepository('AppBundle:Tld')->listTldRegisterPrices()),
-				'hosting_prices' => json_encode([])
+				'hosting_prices' => json_encode($this->getDoctrine()->getRepository('AppBundle:Hostingplan')->listHostingRegisterPrices())
 			]
 		);
 	}
