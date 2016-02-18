@@ -35,7 +35,6 @@ class MinicartController extends Controller
 						$this->get('app.domain')->checkDomain($form->get('custom_domain')->getData().'.'.$form->get('tld')->getData());
 					} catch(\Exception $e) {
 						$form->get('custom_domain')->addError(new FormError($e->getMessage()));
-dump($form->get('custom_domain'));
 					}
 				}
 
@@ -98,10 +97,10 @@ dump($form->get('custom_domain'));
 				->add('register_username', 'text', ['label' => 'Usuario:'])
 				->add('register_password', 'password', ['label' => 'Contraseña:'])
 				->add('register_retype_password', 'password', ['label' => 'Escriba nuevamente la contraseña:'])
+			  	->add('email', 'text', ['label' => 'Correo:'])
 
 				->add('name', 'text', ['label' => 'Nombre:'])
 				->add('company', 'text', ['label' => 'Empresa:'])
-				->add('email', 'text', ['label' => 'Correo:'])
 				->add('address_line_1', 'text', ['label' => 'Dirección 1:'])
 				->add('address_line_2', 'text', ['label' => 'Dirección 2:'])
 				->add('city', 'text', ['label' => 'Ciudad:'])

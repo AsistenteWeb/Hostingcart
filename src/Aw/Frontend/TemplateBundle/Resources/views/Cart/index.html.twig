@@ -29,7 +29,6 @@
 {% endblock custom_stylesheets %}
 
 {% block section_one %}
-{{ dump(hosting_prices) }}
     <form action="{{ path('frontend_cart_proccess_domainandhosting') }}" novalidate method="post">
     <section id="cart_items">
         <div class="container">
@@ -256,6 +255,7 @@
             $("#frontend_order_tld").hide();
 
             $("#domain_cost").text('0.00')
+            total_to_pay();
         }
     }
 
