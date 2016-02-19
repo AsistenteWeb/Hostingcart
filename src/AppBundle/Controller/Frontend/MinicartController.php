@@ -39,7 +39,9 @@ class MinicartController extends Controller
 				}
 
 				if ($form->get('register')->getData() == 2) {
-
+				  if (trim($form->get('own_domain')->getData()) == "") {
+					$form->get('custom_domain')->addError(new FormError("El dominio no puede estar en blanco"));
+				  }
 				}
 
 			} else {

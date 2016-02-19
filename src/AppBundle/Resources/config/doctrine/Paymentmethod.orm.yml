@@ -12,6 +12,9 @@ AppBundle\Entity\Paymentmethod:
     alias:
       type: string
       nullable: true
+    enable:
+      type: boolean
+      nullable: false
   oneToMany:
     payment:
       targetEntity: Payment

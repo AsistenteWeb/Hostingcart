@@ -30,6 +30,11 @@ class Paymentmethod
     private $payment;
 
     /**
+     * @var boolean
+     */
+    private $enable=false;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -124,5 +129,28 @@ class Paymentmethod
     public function getPayment()
     {
         return $this->payment;
+    }
+
+    /**
+     * Set enable
+     *
+     * @param boolean $enable
+     * @return Paymentmethod
+     */
+    public function setEnable($enable)
+    {
+        $this->enable = $enable;
+
+        return $this;
+    }
+
+    /**
+     * Get enable
+     *
+     * @return boolean 
+     */
+    public function getEnable()
+    {
+        return $this->enable;
     }
 }
