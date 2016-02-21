@@ -17,7 +17,8 @@ class PaymentmethodType extends AbstractType
         $builder
             ->add('name')
             ->add('enable')
-            ->add('path')
+            ->add('module')
+            ->add('text')
         ;
     }
     

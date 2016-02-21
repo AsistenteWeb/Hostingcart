@@ -35,6 +35,17 @@ class Paymentmethod
     private $enable=false;
 
     /**
+     * @var string
+     */
+    private $module;
+
+    /**
+     * @var string
+     */
+    private $text;
+
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -153,32 +164,50 @@ class Paymentmethod
     {
         return $this->enable;
     }
-    /**
-     * @var string
-     */
-    private $path;
-
 
     /**
-     * Set path
+     * Set module
      *
-     * @param string $path
+     * @param string $module
      * @return Paymentmethod
      */
-    public function setPath($path)
+    public function setModule($module)
     {
-        $this->path = $path;
+        $this->module = $module;
 
         return $this;
     }
 
     /**
-     * Get path
+     * Get module
      *
      * @return string 
      */
-    public function getPath()
+    public function getModule()
     {
-        return $this->path;
+        return $this->module;
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $text
+     * @return Paymentmethod
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string 
+     */
+    public function getText()
+    {
+        return $this->text;
     }
 }

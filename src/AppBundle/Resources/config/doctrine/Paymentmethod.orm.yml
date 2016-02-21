@@ -10,9 +10,12 @@ AppBundle\Entity\Paymentmethod:
     name:
       type: string
       nullable: true
-    path:
+    module:
       type: string
       nullable: false
+    text:
+      type: text
+      nullable: true
     alias:
       type: string
       nullable: true
