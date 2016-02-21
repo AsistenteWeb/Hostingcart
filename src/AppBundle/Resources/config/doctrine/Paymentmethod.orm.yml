@@ -1,5 +1,6 @@
 AppBundle\Entity\Paymentmethod:
   type: entity
+  repositoryClass: AppBundle\Entity\PaymentmethodRepository
   fields:
     id:
       id: true
@@ -9,6 +10,9 @@ AppBundle\Entity\Paymentmethod:
     name:
       type: string
       nullable: true
+    path:
+      type: string
+      nullable: false
     alias:
       type: string
       nullable: true

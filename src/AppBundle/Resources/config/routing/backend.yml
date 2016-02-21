@@ -26,3 +26,7 @@ app_dnsdefault:
 app_whois_domain:
     resource: "@AppBundle/Resources/config/routing/backend/whoisdomain.yml"
     prefix:   /whoisdomain
+
+app_paymentmethod:
+    resource: "@AppBundle/Resources/config/routing/backend/paymentmethod.yml"
+    prefix:   /paymentmethod

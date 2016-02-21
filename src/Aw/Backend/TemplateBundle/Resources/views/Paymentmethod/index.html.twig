@@ -1,0 +1,58 @@
+{% extends 'AwBackendTemplateBundle::base.html.twig' %}
+
+{% block content_title %}{% trans %}Planes Hosting{% endtrans %}{% endblock content_title %}
+{% block breadcrumb %}
+    <div class="breadcrumb"><a href="{{ path('') }}" class="btn btn-block btn-success"> <i class="fa fa-plus"></i> {% trans %}Nuevo Metodo de Pago{% endtrans %}</a></div>
+{% endblock breadcrumb %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div id="list" class="box">
+            <div class="box-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Plan</th>
+                            <th>Cpanel Plan</th>
+                            <th>Espacio en Disco</th>
+                            <th>Ancho de Banda</th>
+                            <th>Registro</th>
+                            <th>Renovaci&oacute;n</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for host in hostings %}
+                        <tr>
+                            <td>
+                                <form action="{{ path('hostingplan_edit', { 'id': host.id }) }}" method="get">
+                                    <button type="submit" class="btn btn-small">
+                                        <i class="ion-edit"></i> Editar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <!--
+    <script src="{{ asset('bundles/app/jquery_validator/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/jquery_validator/localization/messages_es.min.js') }}"></script>
+-->
+    <script>
+        $( document ).ready(function() {
+//            $("form").validate();
+            $( '#productos' ).addClass( 'active' );
+            $( '#productos_view' ).css( 'display', 'block' );
+            $( '#hosting' ).addClass( 'active' );
+        });
+    </script>
+{% endblock %}

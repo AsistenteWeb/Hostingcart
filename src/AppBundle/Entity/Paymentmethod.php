@@ -153,4 +153,32 @@ class Paymentmethod
     {
         return $this->enable;
     }
+    /**
+     * @var string
+     */
+    private $path;
+
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Paymentmethod
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
 }

@@ -1,0 +1,26 @@
+paymentmethod:
+    path:     /
+    defaults: { _controller: "AppBundle:Backend/Paymentmethod:index" }
+
+paymentmethod_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Backend/Paymentmethod:new" }
+
+paymentmethod_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Backend/Paymentmethod:create" }
+    methods:  POST
+
+paymentmethod_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Backend/Paymentmethod:edit" }
+
+paymentmethod_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Backend/Paymentmethod:update" }
+    methods:  [POST, PUT]
+
+paymentmethod_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Backend/Paymentmethod:delete" }
+    methods:  [POST, DELETE]
