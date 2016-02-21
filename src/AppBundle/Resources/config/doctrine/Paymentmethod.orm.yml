@@ -21,7 +21,7 @@ AppBundle\Entity\Paymentmethod:
       nullable: true
     enable:
       type: boolean
-      nullable: false
+      nullable: true
   oneToMany:
     payment:
       targetEntity: Payment
