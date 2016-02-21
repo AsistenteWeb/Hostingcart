@@ -2,7 +2,7 @@
 
 {% block content_title %}{% trans %}Planes Hosting{% endtrans %}{% endblock content_title %}
 {% block breadcrumb %}
-    <div class="breadcrumb"><a href="{{ path('') }}" class="btn btn-block btn-success"> <i class="fa fa-plus"></i> {% trans %}Nuevo Metodo de Pago{% endtrans %}</a></div>
+    <div class="breadcrumb"><a href="{{ path('paymentmethod_new') }}" class="btn btn-block btn-success"> <i class="fa fa-plus"></i> {% trans %}Nuevo Metodo de Pago{% endtrans %}</a></div>
 {% endblock breadcrumb %}
 {% block content %}
 <div class="row">
@@ -13,20 +13,19 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Plan</th>
-                            <th>Cpanel Plan</th>
-                            <th>Espacio en Disco</th>
-                            <th>Ancho de Banda</th>
-                            <th>Registro</th>
-                            <th>Renovaci&oacute;n</th>
+                            <th>Nombre</th>
+                            <th>Habilitado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                    {% for host in hostings %}
+                    {% for paymentmethod in paymentmethods %}
                         <tr>
+                            <td>{{ paymentmethod.id }}</td>
+                            <td>{{ paymentmethod.name }}</td>
+                            <td>{{ paymentmethod.enable }}</td>
                             <td>
-                                <form action="{{ path('hostingplan_edit', { 'id': host.id }) }}" method="get">
+                                <form action="{{ path('paymentmethod_edit', { 'id': paymentmethod.id }) }}" method="get">
                                     <button type="submit" class="btn btn-small">
                                         <i class="ion-edit"></i> Editar
                                     </button>

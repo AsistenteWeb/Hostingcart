@@ -361,17 +361,10 @@
                         <li id="proveedores_hostings"><a href="#"><i class="fa fa-circle-o"></i> Hosting</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-pie-chart"></i>
-                        <span>Métodos de Pago</span>
-                        <i class="fa fa-angle-left pull-right"></i>
+                <li>
+                    <a href="{{ path('paymentmethod_index') }}">
+                        <i class="fa fa-th"></i> <span>Metodos de Pago</span> <small class="label pull-right bg-green">new</small>
                     </a>
-                    <ul class="treeview-menu">
-                        {% for paymentMethod in paymentMethods%}
-                            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> {{ paymentMethod.name }}</a></li>
-                        {% endfor %}
-                    </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">

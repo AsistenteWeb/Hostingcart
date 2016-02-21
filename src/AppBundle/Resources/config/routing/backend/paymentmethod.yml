@@ -1,4 +1,4 @@
-paymentmethod:
+paymentmethod_index:
     path:     /
     defaults: { _controller: "AppBundle:Backend/Paymentmethod:index" }
 

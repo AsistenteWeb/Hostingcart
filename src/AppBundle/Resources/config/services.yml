@@ -14,12 +14,3 @@ services:
 
     app.strong.password:
         class: AppBundle\Services\StrongPasswords
-
-#    app.backend.paymentlist:
-#        class: AppBundle\Listeners\Backend\PaymentMethods
-#        arguments:
-#            - @router
-#            - @doctrine
-#            - @twig
-#        tags:
-#            - { name: kernel.event_listener, event: kernel.request }
