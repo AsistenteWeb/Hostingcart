@@ -210,4 +210,9 @@ class Paymentmethod
     {
         return $this->text;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getName();
+    }
 }

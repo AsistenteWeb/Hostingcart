@@ -17,7 +17,7 @@ class MinicartController extends Controller
 
 	public function proccessdomainandhostingAction(Request $request)
 	{
-		$form = $this->createForm(new OrderType());
+		$form = $this->createForm(new OrderType($this->get('doctrine')));
 		$securityContext = $this->container->get('security.authorization_checker');
 
 		if (!$securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -73,7 +73,7 @@ class MinicartController extends Controller
 
 	public function domainandhostingAction(Request $request, $id)
 	{
-		$form = $this->createForm(new OrderType());
+		$form = $this->createForm(new OrderType($this->get('doctrine')));
 		$securityContext = $this->container->get('security.authorization_checker');
 
 		if (!$securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {

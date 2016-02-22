@@ -3,12 +3,22 @@
 
 namespace AppBundle\Form\Frontend;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class OrderType extends AbstractType
 {
+	private $doctrine;
+	private $defaultPaymentMethod;
+
+	public function __construct(Registry $doctrine, $defaultPaymentMethod = 'Paypal')
+	{
+		$this->doctrine = $doctrine;
+		$this->defaultPaymentMethod = $this->doctrine->getRepository('AppBundle:Paymentmethod')->findOneBy(['name'=>$defaultPaymentMethod]);
+	}
+
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
@@ -50,18 +60,18 @@ class OrderType extends AbstractType
 					'class' => 'AppBundle:Hostingplan'
 				]
 			)
+
 			->add(
-				'payment',
-				'choice',
+				'paymentmethod',
+				'entity',
 				[
-					'choices' => ['1' => 'Paypal', '2' => 'Pago en efectivo'],
-					'mapped' => false,
-					'multiple' => false,
+					'class' => 'AppBundle:Paymentmethod',
+					'data_class' => 'AppBundle\Entity\Paymentmethod',
 					'expanded' => true,
-					'data' => '1',
-					'label' => 'Metodo de pago'
+					'data' => $this->defaultPaymentMethod
 				]
 			)
+
 			->add(
 				'clientregister',
 				'choice',
